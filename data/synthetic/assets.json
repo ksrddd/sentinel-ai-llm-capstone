@@ -1,0 +1,19 @@
+{
+  "_note": "Synthetic asset catalogue for the fictional Kestrel Analytics demo environment. Not real systems.",
+  "assets": [
+    {"hostname": "HQ-DC01", "tier": "critical", "role": "Domain controller", "owner": "Identity Team", "data_classification": "restricted"},
+    {"hostname": "DB-CUST-01", "tier": "critical", "role": "Customer records database", "owner": "Data Platform", "data_classification": "regulated"},
+    {"hostname": "PAY-GW-01", "tier": "critical", "role": "Payment gateway", "owner": "Payments", "data_classification": "regulated"},
+    {"hostname": "FS-HQ-03", "tier": "high", "role": "File server", "owner": "IT Operations", "data_classification": "internal"},
+    {"hostname": "GIT-SRV-01", "tier": "high", "role": "Source code repository", "owner": "Engineering", "data_classification": "confidential"},
+    {"hostname": "HR-APP-01", "tier": "high", "role": "HR application server", "owner": "People Ops", "data_classification": "confidential"},
+    {"hostname": "WEB-PORTAL-02", "tier": "high", "role": "Public customer web portal", "owner": "Digital", "data_classification": "internal"},
+    {"hostname": "VPN-GW-01", "tier": "high", "role": "Remote access VPN gateway", "owner": "Network Team", "data_classification": "internal"},
+    {"hostname": "MAIL-GW-01", "tier": "high", "role": "Mail gateway", "owner": "Messaging", "data_classification": "internal"},
+    {"hostname": "WS-FIN-114", "tier": "medium", "role": "Finance laptop", "owner": "Finance", "data_classification": "confidential"},
+    {"hostname": "WS-MKT-052", "tier": "medium", "role": "Marketing laptop", "owner": "Marketing", "data_classification": "internal"},
+    {"hostname": "WS-ENG-207", "tier": "medium", "role": "Engineering workstation", "owner": "Engineering", "data_classification": "internal"},
+    {"hostname": "LAB-TEST-07", "tier": "low", "role": "Lab test machine", "owner": "QA", "data_classification": "none"},
+    {"hostname": "KIOSK-LOBBY-01", "tier": "low", "role": "Lobby kiosk", "owner": "Facilities", "data_classification": "none"}
+  ]
+}
