@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SentinelAI Triage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <h1>SentinelAI</h1>
+      <p class="tagline">SOC incident triage copilot &middot; academic prototype &middot; synthetic data only</p>
+    </div>
+  </div>
+  <div class="status" id="status" aria-live="polite">
+    <span class="pill" id="status-llm">checking&hellip;</span>
+    <span class="pill pill-muted" id="status-retrieval"></span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" class="tab" aria-selected="true" data-tab="investigate" id="tab-investigate">Investigate</button>
+  <button role="tab" class="tab" aria-selected="false" data-tab="knowledge" id="tab-knowledge">Playbooks &amp; severity</button>
+  <button role="tab" class="tab" aria-selected="false" data-tab="history" id="tab-history">History</button>
+  <button role="tab" class="tab" aria-selected="false" data-tab="evaluation" id="tab-evaluation">Evaluation</button>
+</nav>
+
+<main>
+  <!-- INVESTIGATE -->
+  <section class="view" id="view-investigate" role="tabpanel" aria-labelledby="tab-investigate">
+    <div class="grid-investigate">
+      <form class="panel" id="alert-form">
+        <div class="panel-head"><h2>Alert input</h2></div>
+        <label class="field">
+          <span>Load a synthetic sample</span>
+          <select id="sample-select"><option value="">Choose a sample alert&hellip;</option></select>
+        </label>
+        <label class="field">
+          <span>Alert JSON or log lines</span>
+          <textarea id="alert-text" rows="12" maxlength="20000" spellcheck="false"
+                    placeholder='{"host": "WS-FIN-114", "src_ip": "203.0.113.45", "event_id": 4625, ...}' required></textarea>
+        </label>
+        <div class="form-row">
+          <span class="muted small" id="char-count">0 / 20000</span>
+          <button type="submit" class="btn-primary" id="analyze-btn">Analyze alert</button>
+        </div>
+        <p class="muted small">The copilot drafts a report for human review. It never executes containment actions.</p>
+      </form>
+
+      <div class="results" id="results">
+        <div class="empty" id="results-empty">
+          <h2>No incident analysed yet</h2>
+          <p>Paste a synthetic alert or load a sample, then run the analysis. The agent searches playbooks,
+             calculates severity with the PB-002 matrix and drafts a cited report.</p>
+        </div>
+        <div class="loading" id="results-loading" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Running extraction, agent tools and report drafting&hellip;</p>
+          <p class="muted small">The class model can take up to a minute.</p>
+        </div>
+        <div class="error-box" id="results-error" role="alert" hidden></div>
+        <div id="report" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KNOWLEDGE -->
+  <section class="view" id="view-knowledge" role="tabpanel" aria-labelledby="tab-knowledge" hidden>
+    <div class="grid-two">
+      <div class="panel">
+        <div class="panel-head"><h2>Search playbooks</h2><span class="muted small">retrieval only, no LLM</span></div>
+        <form class="search-row" id="search-form">
+          <input id="search-input" type="search" minlength="3" maxlength="500" required
+                 placeholder="e.g. hidden encoded powershell launched from word" aria-label="Search query">
+          <button class="btn-primary" type="submit">Search</button>
+        </form>
+        <div id="search-results"></div>
+        <h3 class="sub">All playbooks</h3>
+        <ul class="doc-list" id="doc-list"></ul>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Severity calculator</h2><span class="muted small">deterministic PB-002 matrix</span></div>
+        <form id="severity-form" class="sev-form">
+          <label class="field"><span>Asset</span><select id="sev-host"></select></label>
+          <label class="field"><span>Alert confidence</span>
+            <select id="sev-conf"><option>low</option><option selected>medium</option><option>high</option></select></label>
+          <label class="field"><span>Observed impact</span>
+            <select id="sev-impact"><option>none</option><option selected>suspected</option>
+              <option>confirmed_limited</option><option>confirmed_widespread</option></select></label>
+          <label class="check"><input type="checkbox" id="sev-priv"> Privileged account involved</label>
+          <button class="btn-primary" type="submit">Calculate</button>
+        </form>
+        <div id="severity-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="view" id="view-history" role="tabpanel" aria-labelledby="tab-history" hidden>
+    <div class="panel">
+      <div class="panel-head"><h2>Saved analyses</h2><button class="btn-ghost" id="refresh-analyses" type="button">Refresh</button></div>
+      <div class="table-wrap"><table class="table" id="analyses-table"><thead><tr>
+        <th>Incident</th><th>Created (UTC)</th><th>Type</th><th>Severity</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Synthetic incident history</h2>
+        <form id="history-form" class="inline-form">
+          <select id="history-type" aria-label="Incident type"><option value="">All types</option></select>
+          <button class="btn-ghost" type="submit">Filter</button>
+        </form></div>
+      <div class="table-wrap"><table class="table" id="history-table"><thead><tr>
+        <th>Case</th><th>Opened</th><th>Type</th><th>Host</th><th>Severity</th><th>Summary</th><th>Closure</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- EVALUATION -->
+  <section class="view" id="view-evaluation" role="tabpanel" aria-labelledby="tab-evaluation" hidden>
+    <div class="panel" id="eval-panel"><p class="muted">Loading evaluation results&hellip;</p></div>
+  </section>
+</main>
+
+<dialog id="doc-dialog" aria-labelledby="doc-title">
+  <div class="dialog-head">
+    <div><p class="muted small" id="doc-meta"></p><h2 id="doc-title"></h2></div>
+    <button class="btn-ghost" id="doc-close" type="button" aria-label="Close">Close</button>
+  </div>
+  <div class="doc-body" id="doc-body"></div>
+</dialog>
+</body>
+</html>
