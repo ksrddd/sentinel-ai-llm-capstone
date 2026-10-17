@@ -1,0 +1,8 @@
+{
+  "name": "hybrid-sbert-section-a0.3",
+  "method": "hybrid",
+  "chunking": "section",
+  "backend": "sbert",
+  "alpha": 0.3,
+  "threshold": 0.316955
+}

@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-16T15:25:57+00:00",
+  "model": "gemma-4-E4B-it",
+  "list_models": {
+    "ok": true,
+    "model_listed": true
+  },
+  "chat": {
+    "ok": true,
+    "reply": "OK"
+  },
+  "system_role": {
+    "ok": true,
+    "reply": "OK"
+  },
+  "json_mode": {
+    "ok": true,
+    "reply": "```json\n{\"status\": \"ok\"}\n```"
+  },
+  "native_tools": {
+    "ok": true,
+    "tool_calls": [
+      {
+        "name": "calculate_severity",
+        "arguments": "{\"hostname\": \"HQ-DC01\"}"
+      }
+    ],
+    "native_tool_call_returned": true
+  }
+}

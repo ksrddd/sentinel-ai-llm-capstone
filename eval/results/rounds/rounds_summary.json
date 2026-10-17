@@ -1,0 +1,210 @@
+{
+  "r0_baseline": {
+    "test v1 (12)": {
+      "cases_run": 12,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.5714,
+      "severity_cases": 7,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.9167,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "dev v1 (13)": {
+      "cases_run": 13,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.7692,
+      "severity_accuracy": 0.6,
+      "severity_cases": 5,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.9231,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v2 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.9375,
+      "severity_accuracy": 0.4615,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.75,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    }
+  },
+  "r1_factor_rubric": {
+    "test v1 (12)": {
+      "cases_run": 12,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.8571,
+      "severity_cases": 7,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.9167,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "dev v1 (13)": {
+      "cases_run": 13,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.8462,
+      "severity_accuracy": 0.8,
+      "severity_cases": 5,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v2 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.9375,
+      "severity_accuracy": 0.6154,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.8125,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v3 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.9231,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.8125,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    }
+  },
+  "r2_evidence_kind_fallback": {
+    "test v1 (12)": {
+      "cases_run": 12,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.8571,
+      "severity_cases": 7,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "dev v1 (13)": {
+      "cases_run": 13,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.8462,
+      "severity_accuracy": 1.0,
+      "severity_cases": 5,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v2 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.9375,
+      "severity_accuracy": 0.6923,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v3 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.9231,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.9375,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v4 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.6154,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    }
+  },
+  "r2b_repeat_noise_check": {
+    "holdout v3 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.9231,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.9375,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    }
+  },
+  "r3_outcome_flag_label_fallback": {
+    "test v1 (12)": {
+      "cases_run": 12,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 1.0,
+      "severity_cases": 7,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "dev v1 (13)": {
+      "cases_run": 13,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.7692,
+      "severity_accuracy": 1.0,
+      "severity_cases": 5,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v2 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.9375,
+      "severity_accuracy": 0.6923,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v3 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 1.0,
+      "severity_accuracy": 0.8462,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 0.875,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    },
+    "holdout v4 (16)": {
+      "cases_run": 16,
+      "valid_structured_output_rate": 1.0,
+      "incident_type_accuracy": 0.9375,
+      "severity_accuracy": 0.8462,
+      "severity_cases": 13,
+      "citation_validity_rate": 1.0,
+      "relevant_citation_rate": 1.0,
+      "undetermined_flagged_rate": 1.0,
+      "native_tool_mode_rate": 1.0
+    }
+  }
+}

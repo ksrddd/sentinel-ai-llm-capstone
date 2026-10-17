@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "generated_at": "2026-10-16T18:52:22+00:00",
+    "model": "gemma-4-E4B-it",
+    "temperature": 0.0,
+    "split": "all",
+    "dataset": "eval/datasets/e2e_holdout_v2.jsonl",
+    "command": "python -m eval.run_e2e_eval --split all --dataset eval/datasets/e2e_holdout_v2.jsonl",
+    "retrieval": {
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "sbert",
+      "alpha": 0.3,
+      "min_score": 0.316955
+    }
+  },
+  "aggregate": {
+    "cases_run": 16,
+    "valid_structured_output_rate": 1.0,
+    "incident_type_accuracy": 0.9375,
+    "severity_accuracy": 0.4615,
+    "severity_cases": 13,
+    "citation_validity_rate": 1.0,
+    "relevant_citation_rate": 0.75,
+    "undetermined_flagged_rate": 1.0,
+    "native_tool_mode_rate": 1.0
+  }
+}

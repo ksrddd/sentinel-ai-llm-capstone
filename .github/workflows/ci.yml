@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      run_live:
+        description: "Also run live LLM tests (needs OPENAI_API_KEY / OPENAI_BASE_URL repository secrets)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install (CPU-only torch for the neural retrieval extra)
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev,neural]"
+      - name: Lint
+        run: ruff check .
+      - name: Offline tests (schemas, corpus, retrieval, severity, agent, API with mocked LLM)
+        run: pytest -q
+      - name: Retrieval evaluation is reproducible
+        run: |
+          python -m eval.run_retrieval_eval
+          python - <<'EOF'
+          import json
+          sel = json.load(open("eval/results/selected_config.json"))
+          print("selected:", sel)
+          assert sel["name"] == "hybrid-sbert-section-a0.3", sel
+          EOF
+
+  live:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_live
+    runs-on: ubuntu-latest
+    needs: offline
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev,neural]"
+      - run: pytest -m live -q

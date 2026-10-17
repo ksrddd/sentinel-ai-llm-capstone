@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "generated_at": "2026-10-16T14:11:18+00:00",
+    "command": "python -m eval.run_retrieval_eval",
+    "dataset": "eval/datasets/retrieval_eval_v1.jsonl",
+    "dataset_sha256_16": "ef03063861a8e6be",
+    "dataset_counts": {
+      "total": 32,
+      "dev": 16,
+      "test": 16,
+      "dev_answerable": 14,
+      "test_answerable": 14
+    },
+    "corpus_fingerprint": "3b870bef6c1f75d8",
+    "corpus_documents": 19,
+    "seeds": {
+      "lsa_truncated_svd_random_state": 42
+    },
+    "embedding_models": {
+      "lsa": "TF-IDF(1-2 gram, sublinear) + TruncatedSVD(<=96 dims, arpack)",
+      "sbert": "sentence-transformers/all-MiniLM-L6-v2"
+    },
+    "bm25": {
+      "k1": 1.5,
+      "b": 0.75,
+      "hybrid_saturation_k": 8.0
+    },
+    "selection_rule": "max dev mean(Recall@3, MRR@5); tie-break dev abstention accuracy; then list order",
+    "python": "3.13.12"
+  },
+  "baseline": {
+    "name": "bm25-fixed",
+    "threshold": 3.868369,
+    "test": {
+      "n_queries": 16,
+      "n_answerable": 14,
+      "recall@3": 0.6786,
+      "mrr@5": 0.6964,
+      "precision@3": 0.2381,
+      "hit@1": 0.6429,
+      "abstention_accuracy": 0.875,
+      "false_abstentions": 1,
+      "missed_abstentions": 1
+    },
+    "dev": {
+      "n_queries": 16,
+      "n_answerable": 14,
+      "recall@3": 0.9286,
+      "mrr@5": 0.881,
+      "precision@3": 0.381,
+      "hit@1": 0.7857,
+      "abstention_accuracy": 1.0,
+      "false_abstentions": 0,
+      "missed_abstentions": 0
+    }
+  },
+  "selected": {
+    "name": "hybrid-sbert-section-a0.3",
+    "method": "hybrid",
+    "chunking": "section",
+    "backend": "sbert",
+    "alpha": 0.3,
+    "threshold": 0.316955,
+    "test": {
+      "n_queries": 16,
+      "n_answerable": 14,
+      "recall@3": 0.75,
+      "mrr@5": 0.7286,
+      "precision@3": 0.2619,
+      "hit@1": 0.6429,
+      "abstention_accuracy": 0.875,
+      "false_abstentions": 1,
+      "missed_abstentions": 1
+    },
+    "dev": {
+      "n_queries": 16,
+      "n_answerable": 14,
+      "recall@3": 0.9643,
+      "mrr@5": 0.9524,
+      "precision@3": 0.4048,
+      "hit@1": 0.9286,
+      "abstention_accuracy": 1.0,
+      "false_abstentions": 0,
+      "missed_abstentions": 0
+    }
+  },
+  "test_paired_rr@5_vs_baseline": {
+    "wins": 2,
+    "losses": 1,
+    "ties": 11
+  },
+  "selected_test_failures": [
+    {
+      "config": "hybrid-sbert-section-a0.3",
+      "id": "Q02",
+      "split": "test",
+      "scenario": "answerable",
+      "relevant": "PB-004",
+      "ranked_top5": "PB-018|PB-013|PB-005|PB-006|PB-004",
+      "top_score": 0.475587,
+      "recall@3": 0.0,
+      "rr@5": 0.2,
+      "abstained": false,
+      "expected_abstention": false,
+      "abstention_correct": true
+    },
+    {
+      "config": "hybrid-sbert-section-a0.3",
+      "id": "Q04",
+      "split": "test",
+      "scenario": "answerable",
+      "relevant": "PB-005",
+      "ranked_top5": "PB-016|PB-001|PB-018|PB-004|PB-015",
+      "top_score": 0.284387,
+      "recall@3": 0.0,
+      "rr@5": 0.0,
+      "abstained": true,
+      "expected_abstention": false,
+      "abstention_correct": false
+    },
+    {
+      "config": "hybrid-sbert-section-a0.3",
+      "id": "Q20",
+      "split": "test",
+      "scenario": "similar_different_playbook",
+      "relevant": "PB-017|PB-005",
+      "ranked_top5": "PB-017|PB-004|PB-012|PB-013|PB-003",
+      "top_score": 0.584811,
+      "recall@3": 0.5,
+      "rr@5": 1.0,
+      "abstained": false,
+      "expected_abstention": false,
+      "abstention_correct": true
+    },
+    {
+      "config": "hybrid-sbert-section-a0.3",
+      "id": "Q26",
+      "split": "test",
+      "scenario": "policy_question",
+      "relevant": "PB-016",
+      "ranked_top5": "PB-001|PB-018|PB-005|PB-011|PB-006",
+      "top_score": 0.401227,
+      "recall@3": 0.0,
+      "rr@5": 0.0,
+      "abstained": false,
+      "expected_abstention": false,
+      "abstention_correct": true
+    },
+    {
+      "config": "hybrid-sbert-section-a0.3",
+      "id": "Q30",
+      "split": "test",
+      "scenario": "out_of_domain",
+      "relevant": "",
+      "ranked_top5": "PB-005|PB-015|PB-017|PB-018|PB-001",
+      "top_score": 0.321007,
+      "recall@3": "",
+      "rr@5": "",
+      "abstained": false,
+      "expected_abstention": true,
+      "abstention_correct": false
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "generated_at": "2026-10-17T07:27:11+00:00",
+    "model": "gemma-4-E4B-it",
+    "temperature": 0.0,
+    "split": "test",
+    "dataset": "eval/datasets/retrieval_eval_v1.jsonl",
+    "round": "r3_outcome_flag_label_fallback",
+    "command": "python -m eval.run_e2e_eval --split test --round r3_outcome_flag_label_fallback",
+    "retrieval": {
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "sbert",
+      "alpha": 0.3,
+      "min_score": 0.316955
+    }
+  },
+  "aggregate": {
+    "cases_run": 12,
+    "valid_structured_output_rate": 1.0,
+    "incident_type_accuracy": 1.0,
+    "severity_accuracy": 1.0,
+    "severity_cases": 7,
+    "citation_validity_rate": 1.0,
+    "relevant_citation_rate": 1.0,
+    "undetermined_flagged_rate": 1.0,
+    "native_tool_mode_rate": 1.0
+  }
+}

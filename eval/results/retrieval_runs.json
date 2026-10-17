@@ -1,0 +1,405 @@
+{
+  "meta": {
+    "generated_at": "2026-10-16T14:11:18+00:00",
+    "command": "python -m eval.run_retrieval_eval",
+    "dataset": "eval/datasets/retrieval_eval_v1.jsonl",
+    "dataset_sha256_16": "ef03063861a8e6be",
+    "dataset_counts": {
+      "total": 32,
+      "dev": 16,
+      "test": 16,
+      "dev_answerable": 14,
+      "test_answerable": 14
+    },
+    "corpus_fingerprint": "3b870bef6c1f75d8",
+    "corpus_documents": 19,
+    "seeds": {
+      "lsa_truncated_svd_random_state": 42
+    },
+    "embedding_models": {
+      "lsa": "TF-IDF(1-2 gram, sublinear) + TruncatedSVD(<=96 dims, arpack)",
+      "sbert": "sentence-transformers/all-MiniLM-L6-v2"
+    },
+    "bm25": {
+      "k1": 1.5,
+      "b": 0.75,
+      "hybrid_saturation_k": 8.0
+    },
+    "selection_rule": "max dev mean(Recall@3, MRR@5); tie-break dev abstention accuracy; then list order",
+    "python": "3.13.12"
+  },
+  "runs": [
+    {
+      "name": "bm25-fixed",
+      "method": "bm25",
+      "chunking": "fixed",
+      "backend": null,
+      "alpha": null,
+      "n_chunks": 40,
+      "threshold": 3.868369,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.9286,
+        "mrr@5": 0.881,
+        "precision@3": 0.381,
+        "hit@1": 0.7857,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.6786,
+        "mrr@5": 0.6964,
+        "precision@3": 0.2381,
+        "hit@1": 0.6429,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 1,
+        "missed_abstentions": 1
+      }
+    },
+    {
+      "name": "bm25-section",
+      "method": "bm25",
+      "chunking": "section",
+      "backend": null,
+      "alpha": null,
+      "n_chunks": 85,
+      "threshold": 4.220667,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.9643,
+        "mrr@5": 0.9167,
+        "precision@3": 0.4048,
+        "hit@1": 0.8571,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.75,
+        "mrr@5": 0.75,
+        "precision@3": 0.2619,
+        "hit@1": 0.7143,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 1,
+        "missed_abstentions": 1
+      }
+    },
+    {
+      "name": "dense-lsa-fixed",
+      "method": "dense",
+      "chunking": "fixed",
+      "backend": "lsa",
+      "alpha": null,
+      "n_chunks": 40,
+      "threshold": 0.0,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.7857,
+        "mrr@5": 0.8571,
+        "precision@3": 0.3333,
+        "hit@1": 0.7857,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.75,
+        "mrr@5": 0.75,
+        "precision@3": 0.2619,
+        "hit@1": 0.7143,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      }
+    },
+    {
+      "name": "dense-lsa-section",
+      "method": "dense",
+      "chunking": "section",
+      "backend": "lsa",
+      "alpha": null,
+      "n_chunks": 85,
+      "threshold": 0.0,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8929,
+        "mrr@5": 0.875,
+        "precision@3": 0.381,
+        "hit@1": 0.7857,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.75,
+        "mrr@5": 0.6786,
+        "precision@3": 0.2619,
+        "hit@1": 0.5714,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      }
+    },
+    {
+      "name": "hybrid-lsa-section-a0.3",
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "lsa",
+      "alpha": 0.3,
+      "n_chunks": 85,
+      "threshold": 0.388775,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8929,
+        "mrr@5": 0.9107,
+        "precision@3": 0.381,
+        "hit@1": 0.8571,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.75,
+        "mrr@5": 0.7143,
+        "precision@3": 0.2619,
+        "hit@1": 0.6429,
+        "abstention_accuracy": 0.8125,
+        "false_abstentions": 1,
+        "missed_abstentions": 2
+      }
+    },
+    {
+      "name": "hybrid-lsa-section-a0.5",
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "lsa",
+      "alpha": 0.5,
+      "n_chunks": 85,
+      "threshold": 0.0,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8929,
+        "mrr@5": 0.9107,
+        "precision@3": 0.381,
+        "hit@1": 0.8571,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.75,
+        "mrr@5": 0.7143,
+        "precision@3": 0.2619,
+        "hit@1": 0.6429,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      }
+    },
+    {
+      "name": "hybrid-lsa-section-a0.7",
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "lsa",
+      "alpha": 0.7,
+      "n_chunks": 85,
+      "threshold": 0.0,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8929,
+        "mrr@5": 0.9107,
+        "precision@3": 0.381,
+        "hit@1": 0.8571,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.75,
+        "mrr@5": 0.6786,
+        "precision@3": 0.2619,
+        "hit@1": 0.5714,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 0,
+        "missed_abstentions": 2
+      }
+    },
+    {
+      "name": "dense-sbert-fixed",
+      "method": "dense",
+      "chunking": "fixed",
+      "backend": "sbert",
+      "alpha": null,
+      "n_chunks": 40,
+      "threshold": 0.223156,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.9286,
+        "mrr@5": 0.8929,
+        "precision@3": 0.381,
+        "hit@1": 0.7857,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.9643,
+        "mrr@5": 0.8452,
+        "precision@3": 0.3333,
+        "hit@1": 0.7143,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      }
+    },
+    {
+      "name": "dense-sbert-section",
+      "method": "dense",
+      "chunking": "section",
+      "backend": "sbert",
+      "alpha": null,
+      "n_chunks": 85,
+      "threshold": 0.221971,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8571,
+        "mrr@5": 0.8,
+        "precision@3": 0.3571,
+        "hit@1": 0.7143,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8214,
+        "mrr@5": 0.8536,
+        "precision@3": 0.2857,
+        "hit@1": 0.7857,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      }
+    },
+    {
+      "name": "hybrid-sbert-section-a0.3",
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "sbert",
+      "alpha": 0.3,
+      "n_chunks": 85,
+      "threshold": 0.316955,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.9643,
+        "mrr@5": 0.9524,
+        "precision@3": 0.4048,
+        "hit@1": 0.9286,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.75,
+        "mrr@5": 0.7286,
+        "precision@3": 0.2619,
+        "hit@1": 0.6429,
+        "abstention_accuracy": 0.875,
+        "false_abstentions": 1,
+        "missed_abstentions": 1
+      }
+    },
+    {
+      "name": "hybrid-sbert-section-a0.5",
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "sbert",
+      "alpha": 0.5,
+      "n_chunks": 85,
+      "threshold": 0.289816,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.9286,
+        "mrr@5": 0.9524,
+        "precision@3": 0.381,
+        "hit@1": 0.9286,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8214,
+        "mrr@5": 0.7619,
+        "precision@3": 0.2857,
+        "hit@1": 0.7143,
+        "abstention_accuracy": 0.9375,
+        "false_abstentions": 1,
+        "missed_abstentions": 0
+      }
+    },
+    {
+      "name": "hybrid-sbert-section-a0.7",
+      "method": "hybrid",
+      "chunking": "section",
+      "backend": "sbert",
+      "alpha": 0.7,
+      "n_chunks": 85,
+      "threshold": 0.25027,
+      "dev": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.9286,
+        "mrr@5": 0.9524,
+        "precision@3": 0.381,
+        "hit@1": 0.9286,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      },
+      "test": {
+        "n_queries": 16,
+        "n_answerable": 14,
+        "recall@3": 0.8214,
+        "mrr@5": 0.8095,
+        "precision@3": 0.2857,
+        "hit@1": 0.7857,
+        "abstention_accuracy": 1.0,
+        "false_abstentions": 0,
+        "missed_abstentions": 0
+      }
+    }
+  ]
+}
