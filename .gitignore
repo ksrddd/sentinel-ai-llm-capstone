@@ -1,0 +1,33 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# generated runtime data (rebuild with: python -m scripts.ingest)
+data/index/
+data/*.db
+data/*.db-journal
+eval/results/*.db
+
+# report build intermediates (the final PDF and figures are committed)
+docs/report/_build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
