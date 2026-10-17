@@ -81,7 +81,7 @@ Requires Python ≥ 3.11 and Git.
 
 **Windows PowerShell**
 ```powershell
-git clone https://github.com/<your-username>/sentinel-ai-llm-capstone.git
+git clone https://github.com/ksrddd/sentinel-ai-llm-capstone.git
 cd sentinel-ai-llm-capstone
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -91,7 +91,7 @@ pip install -e ".[dev,neural,report]"
 
 **macOS / Linux**
 ```bash
-git clone https://github.com/<your-username>/sentinel-ai-llm-capstone.git
+git clone https://github.com/ksrddd/sentinel-ai-llm-capstone.git
 cd sentinel-ai-llm-capstone
 python3 -m venv .venv && source .venv/bin/activate
 python -m pip install --upgrade pip
